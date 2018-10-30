@@ -36,27 +36,26 @@ class Board
       @cups[start_pos] = []
       i = start_pos + 1
       while stones > 0
-        if current_player_name == @name1 && i != 13
-          @cups[i] << :stone
+        j = i % 13
+        if current_player_name == @name1 && j != 13
+          @cups[j] << :stone
           stones -= 1
-        elsif current_player_name == @name2 && i != 6
-          @cups[i] << :stone
+        elsif current_player_name == @name2 && j != 6
+          @cups[j] << :stone
           stones -= 1
-        end
-        if i == 13
-          i = 0
         end
         i += 1
       end
     end
     render
-    next_turn(num)
+    next_turn((start_pos + num) % 13)
   end
 
   def next_turn(ending_cup_idx)
-    if @cups[ending_cup_idx].length > 1 && ending_cup_idx.between?(6, 13)
+
+    if @cups[ending_cup_idx].length == 1 && ending_cup_idx.between?(6, 13)
       :switch
-    elsif @cups[ending_cup_idx].length > 1 && ending_cup_idx.between?(0, 6)
+    elsif @cups[ending_cup_idx].length == 1 && ending_cup_idx.between?(0, 6)
       :prompt
     else
       ending_cup_idx
