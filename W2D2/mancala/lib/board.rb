@@ -53,9 +53,9 @@ class Board
 
   def next_turn(ending_cup_idx)
 
-    if @cups[ending_cup_idx].length == 1 && ending_cup_idx.between?(6, 13)
+    if @cups[ending_cup_idx].length > 1 && ending_cup_idx.between?(0, 6)
       :switch
-    elsif @cups[ending_cup_idx].length == 1 && ending_cup_idx.between?(0, 6)
+    elsif @cups[ending_cup_idx].length == 1
       :prompt
     else
       ending_cup_idx
