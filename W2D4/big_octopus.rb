@@ -45,6 +45,14 @@ end
 tiles_array = ["up", "right-up", "right", "right-down", "down", "left-down", "left",  "left-up" ]
 
 def slow_dance(direction, tiles_array)
+  tiles_array.each do |tile|
+    return tiles_array.index?(tile) if tile == direction
+  end
+end
+
+
+
+def fast_dance(direction, tiles_array)
   tentacles = {
     "up" => 0,
     "right-up" => 1,
@@ -55,15 +63,5 @@ def slow_dance(direction, tiles_array)
     "left" => 6,
     "left-up" => 7
   }
-  tiles_array.each do |tile|
-    return tentacles[tile] if tile == direction
-  end
-end
-
-
-
-def fast_dance(direction, tiles_array)
-
-
-
+  tentacles[direction]
 end
