@@ -10,7 +10,7 @@ class LRUCache
   end
 
   def add(el)
-    unless @cache.inclde?(el)
+    unless @cache.include?(el)
       @cache.shift if @cache.count < length
       @cache.push(el)
     end
