@@ -64,7 +64,17 @@ class Play
   end
 
   def self.find_by_playwright(name)
-
+    playwright = Playwright.find_by_name(name)
+    raise "#{name} not in database" unless playwright
+    plays = PlayDBConnection.instance.execute(<<-SQL, playwright.id)
+    SELECT
+      *
+    FROM
+      plays
+    WHERE
+      playwright_id = ?
+    SQL
+    plays.map { |play| Play.new(play)}
   end
 end
 
@@ -119,5 +129,18 @@ class Playwright
           id = ?
       SQL
     end
+
+  def get_plays
+    raise "#{self} not in database" unless self.id
+    plays = PlayDBConnection.instance.execute(<<-SQL, self.id)
+    SELECT
+      *
+    FROM
+      plays
+    WHERE
+      playwright_id = ?
+    SQL
+    plays.map { |play| Play.new(play)}
+  end
 
 end
