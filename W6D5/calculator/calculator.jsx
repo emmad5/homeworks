@@ -8,7 +8,7 @@ class Calculator extends React.Component{
   }
 
   setNum1(e) {
-    // your code here
+    return this.setState({ result: this.state.result + 1 });
   }
 
 
@@ -16,7 +16,7 @@ class Calculator extends React.Component{
     return (
       <div>
         <h1>{this.state.result}</h1>
-        <button onClick = { () => this.setNum1(e)}>SET NUM</button>
+        <button onClick = { () => this.setNum1()}>Add 1</button>
         CODE
       </div>
     );
